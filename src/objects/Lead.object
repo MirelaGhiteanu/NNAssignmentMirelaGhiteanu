@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>CapitalCity__c</fullName>
+        <externalId>false</externalId>
+        <label>CapitalCity</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CountryAlpha3Code__c</fullName>
+        <externalId>false</externalId>
+        <label>CountryAlpha3Code</label>
+        <length>3</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Since__c</fullName>
+        <externalId>false</externalId>
+        <label>Owner Since</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <validationRules>
+        <fullName>Prevent_Owner_Change</fullName>
+        <active>true</active>
+        <description>Validation rule for leads that do not allow to change owner unless Country, Lead
+Source and No. of Employees are filled in.</description>
+        <errorConditionFormula>AND(
+    ISCHANGED(OwnerId),
+    $Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+    OR(
+        ISBLANK(Country),
+        ISPICKVAL(LeadSource, &quot;&quot;),
+        AND(
+            ISBLANK(NumberOfEmployees),
+            $Profile.Name &lt;&gt; &apos;Contract Manager&apos;
+        )
+    )
+)</errorConditionFormula>
+        <errorMessage>You need to fill in first the highlighted fields!</errorMessage>
+    </validationRules>
+</CustomObject>
