@@ -23,14 +23,10 @@ public class ScheduleUpdateForCountriesTest {
 
         CronTrigger ct = [
                 SELECT Id,
-                        CronExpression,
-                        NextFireTime
+                        CronExpression
                 FROM CronTrigger
                 WHERE Id = :jobId
         ];
-
         System.assertEquals(CRON_EXP, ct.CronExpression);
-
-
     }
 }
