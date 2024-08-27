@@ -4,6 +4,7 @@
 
 public with sharing class CountryLayerHelper {
 
+    @Future(Callout=true)
     public static void upsertCountriesFromCountryLayer() {
         CountryLayerConnection countryLayerConnection = new CountryLayerConnection();
         HttpResponse response = countryLayerConnection.getCountriesFromCountryLayer();
